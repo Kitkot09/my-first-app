@@ -29,23 +29,11 @@
             overflow: hidden;
             position: relative;
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url("bg.jpg") center/cover no-repeat;
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("bg.jpg") center/cover no-repeat,
+                url("bg.JPG") center/cover no-repeat,
+                #111827;
             background-attachment: fixed;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 20%),
-                radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.12), transparent 25%),
-                radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.1), transparent 20%);
-            background-size: 160px 160px, 220px 220px, 280px 280px;
-            opacity: 0.28;
-            pointer-events: none;
         }
 
         .timer-card {
