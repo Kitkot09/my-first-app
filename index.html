@@ -34,6 +34,22 @@
             background-attachment: fixed;
         }
 
+        .live-clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(17, 24, 39, 0.8);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+
         .timer-card {
             background: var(--bg-card);
             backdrop-filter: blur(12px);
@@ -145,6 +161,8 @@
 </head>
 <body>
 
+    <div class="live-clock" id="live-clock">--:--:--</div>
+
     <div class="timer-card">
         <div class="timer-header">Focused Flow</div>
         <h1>JOHAINIE STUDY TIMER</h1>
@@ -177,11 +195,23 @@
         const pauseBtn = document.getElementById('pause-btn');
         const resetBtn = document.getElementById('reset-btn');
         const statusMsg = document.getElementById('status');
+        const liveClockDisplay = document.getElementById('live-clock');
 
         function updateDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
             timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateLiveClock() {
+            const now = new Date();
+            const philippineTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+            let hours = philippineTime.getHours();
+            const minutes = philippineTime.getMinutes().toString().padStart(2, '0');
+            const seconds = philippineTime.getSeconds().toString().padStart(2, '0');
+            const meridiem = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            liveClockDisplay.textContent = `${hours}:${minutes}:${seconds} ${meridiem}`;
         }
 
         function startTimer() {
@@ -221,6 +251,8 @@
         resetBtn.addEventListener('click', resetTimer);
 
         updateDisplay();
+        updateLiveClock();
+        setInterval(updateLiveClock, 1000);
     </script>
 </body>
 </html>
